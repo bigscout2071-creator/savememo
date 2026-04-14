@@ -1,0 +1,35 @@
+name: Auto DB Migration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/migrations/**'
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./backend
+      
+      - name: Run DB Migrations
+        run: node create-table.js
+        working-directory: ./backend
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      
+      - name: Migration Status
+        run: echo "✅ Database migrations completed!"
+        continue-on-error: true
