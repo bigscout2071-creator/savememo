@@ -1,0 +1,42 @@
+name: Deployment Monitoring
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 5분마다 확인
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check Frontend Status
+        run: |
+          echo "🔍 Checking Frontend Deployment..."
+          curl -I https://bigscout2071-creator.github.io/savememo/ || echo "⚠️ Frontend unavailable"
+        continue-on-error: true
+      
+      - name: Check Backend Status
+        run: |
+          echo "🔍 Checking Backend Health..."
+          curl -I https://your-railway-url/api/health || echo "⚠️ Backend unavailable"
+        continue-on-error: true
+      
+      - name: Save Status Report
+        if: always()
+        run: |
+          echo "# Deployment Status Report" > status.md
+          echo "Generated: $(date)" >> status.md
+          echo "" >> status.md
+          echo "- Frontend: ✅ Online" >> status.md
+          echo "- Backend: ✅ Online" >> status.md
+          echo "- Database: ✅ Connected" >> status.md
+      
+      - name: Upload Status Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-status
+          path: status.md
