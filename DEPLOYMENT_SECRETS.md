@@ -16,12 +16,12 @@ SaveMemo 프로젝트의 자동 배포 및 환경변수 관리를 위해 다음 
 ### 1. Supabase 설정
 ```
 SUPABASE_URL
-값: https://emjqtyktrzhgoblihpqv.supabase.co
+값: https://your-project.supabase.co
 ```
 
 ```
 SUPABASE_ANON_KEY
-값: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtanF0eWt0cnpoZ29ibGlocHF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTIzNjksImV4cCI6MjA5MTcyODM2OX0.b20YMFUEFh14gSRPytbde5afAQzauS8peWgUnbCJmuU
+값: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (Supabase에서 복사)
 ```
 
 ### 2. Railway 배포
