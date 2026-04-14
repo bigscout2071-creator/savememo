@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useMemos } from '../context/MemoContext';
+import React, { useState } from 'react';
 import { Memo } from '../types/index';
 
 interface MemoFormProps {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useMemos } from '../context/MemoContext';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
